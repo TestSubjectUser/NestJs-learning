@@ -101,3 +101,29 @@ If a request does not match the DTO, NestJS will return a 400 Bad Request error 
 You don’t need to manually call validate() on every request—NestJS handles it for you.
 
 Error Handling.
+
+Data Persistence - PostgreSQL and TypeORM
+running PostgreSQL via Docker
+
+docker run --name postgres-nest -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+
+docker container ls
+docker container stop postgres-nest
+docker container rm postgres-nest
+
+pgAdmin - create server - give name, in connection give localhost in host name, give username pass
+right click on database give name task-management
+
+Object Relational Mapping(ORM) and TypeORM
+
+setting up a Database Connection
+
+yarn add typeorm @nestjs/typeorm pg
+pg- official driver for postgres
+postgres password = newpassword
+
+TypeOrmModule.forRoot() sets up the connection to your PostgreSQL database with the specified configurations.
+
+Whenever NestJS starts, it syncs your entities with the database (if synchronize is true), ensuring the database schema is up to date with the defined entities.
+
+autoLoadEntities: true saves you from having to manually register every entity within the TypeORM configuration—allowing TypeORM to automatically detect them as long as they are imported properly in your modules.
