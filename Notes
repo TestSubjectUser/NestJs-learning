@@ -127,3 +127,31 @@ TypeOrmModule.forRoot() sets up the connection to your PostgreSQL database with 
 Whenever NestJS starts, it syncs your entities with the database (if synchronize is true), ensuring the database schema is up to date with the defined entities.
 
 autoLoadEntities: true saves you from having to manually register every entity within the TypeORM configuration—allowing TypeORM to automatically detect them as long as they are imported properly in your modules.
+
+Active Record VS Data Mapper Patterns
+https://github.com/typeorm/typeorm
+
+In TypeORM, a repository is a design pattern used to manage and interact with database entities. It provides a set of methods for querying and manipulating data in a specific entity's table. A repository is an abstraction layer between your application and the underlying database, offering a more convenient way to perform CRUD (Create, Read, Update, Delete) operations, as well as more complex queries.
+
+A repository is a class that provides access to a specific entity or table in the database. In TypeORM, each entity (such as Task, User, etc.) has a corresponding repository that exposes methods for interacting with the corresponding database table.
+
+In TypeORM, you inject the repository into your service using the @InjectRepository() decorator. Once injected, the repository provides various methods for interacting with the entity.
+
+find(): Retrieve multiple records.
+findOne(): Retrieve a single record based on conditions.
+save(): Insert a new record or update an existing one.
+remove(): Remove an entity from the database.
+update(): Update specific fields of an entity.
+delete(): Delete a record from the database.
+count(): Count the number of records based on conditions.
+query(): Execute custom raw SQL queries (for more complex use cases).
+
+While raw SQL queries can still be used in TypeORM, repositories provide several advantages over manually writing SQL queries:
+
+While raw SQL queries can still be used in TypeORM, repositories provide several advantages over manually writing SQL queries:
+
+can remove uuid cause it'll be generated auto by typeORM
+yarn remove uuid
+
+repository api typeorm
+error in pgAdmin connection so try to connect with mongoDB
