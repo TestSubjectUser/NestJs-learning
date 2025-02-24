@@ -1,5 +1,7 @@
 Feb24 - NestJs Day-1
 
+https://github.com/arielweinberger/nestjs-recipe/branches/all
+
 npm i -g @nestjs/cli
 nest new project-name
 
@@ -69,3 +71,7 @@ nest g service tasks --no-spec
 technically we can write in controller only but, as it grows it becomes cluter so it's good practise to maintain, and controllers only job is to receive request and ...
 
 yarn add uuid
+
+DTO - Data Transfer Object
+dto dir under tasks, and file create-task.dto.ts
+req comes - controller handles - defined param - req body goes to parameter of type of shape - into service.

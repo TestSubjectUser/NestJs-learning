@@ -6,10 +6,26 @@ import { CreateTaskDto } from './dto/create-task.dto';
 export class TasksService {
   private tasks: Task[] = [];
 
+  //   doSomething() {}
   getAllTasks(): Task[] {
     return this.tasks;
   }
-  //   doSomething() {}
+
+  getTaskById(id: string): Task | undefined {
+    return this.tasks.find((task) => task.id === id);
+  }
+
+  //   deleteTaskById(id: string): Task | undefined {
+  //     return this.tasks.find((task) => {
+  //       if (task.id === id) {
+  //         this.tasks = this.tasks.filter((task) => task.id !== id);
+  //         return task;
+  //       }
+  //     });
+  //   }
+  deleteTask(id: string): void {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
 
   //   createTask(title: string, description: string): Task {
   createTask(createTaskDto: CreateTaskDto): Task {
