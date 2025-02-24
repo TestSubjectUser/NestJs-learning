@@ -1,4 +1,4 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Task, taskStatus } from './tasks.model';
 import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -31,7 +31,13 @@ export class TasksService {
   }
 
   getTaskById(id: string): Task | undefined {
-    return this.tasks.find((task) => task.id === id);
+    const found = this.tasks.find((task) => task.id === id);
+    if (!found) {
+      // bubbles up and hadles by nest, wrap with try catxh to handle manually.
+      // can pass optionala argument
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
+    return found;
   }
 
   //   deleteTaskById(id: string): Task | undefined {
@@ -43,6 +49,7 @@ export class TasksService {
   //     });
   //   }
   deleteTask(id: string): void {
+    const found = this.getTaskById(id);
     this.tasks = this.tasks.filter((task) => task.id !== id);
   }
 
@@ -60,6 +67,7 @@ export class TasksService {
   }
 
   updateTaskStatus(id: string, status: taskStatus): Task {
+    // because we're using getTaskById and handling error in there it alo applies in here
     const task = this.getTaskById(id);
     // if (!task) {
     //   return null;
