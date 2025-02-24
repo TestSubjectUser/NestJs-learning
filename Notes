@@ -67,3 +67,5 @@ creating a tasks service
 nest g service tasks --no-spec
 
 technically we can write in controller only but, as it grows it becomes cluter so it's good practise to maintain, and controllers only job is to receive request and ...
+
+yarn add uuid
