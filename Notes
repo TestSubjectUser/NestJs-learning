@@ -51,3 +51,19 @@ Pattern-based routes are also supported in NestJS. For example, the asterisk (\*
 
 Task Management Application
 nest new nestjs-task-management, yarn
+
+delete - controller, service file.
+yarn start:dev
+
+creating a task module, g - generate
+nest g --help
+
+nest g module tasks
+creating a tasks controller
+nest gcontroller tasks --no-spec
+--no-spec (flag, by default also generate test file, this defines it'll not generate that file)
+
+creating a tasks service
+nest g service tasks --no-spec
+
+technically we can write in controller only but, as it grows it becomes cluter so it's good practise to maintain, and controllers only job is to receive request and ...
