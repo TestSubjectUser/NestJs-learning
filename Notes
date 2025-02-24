@@ -1,6 +1,7 @@
 Feb24 - NestJs Day-1
 
 https://github.com/arielweinberger/nestjs-recipe/branches/all
+https://www.udemy.com/course/nestjs-zero-to-hero/?couponCode=ST4MT240225A
 
 npm i -g @nestjs/cli
 nest new project-name
@@ -75,3 +76,28 @@ yarn add uuid
 DTO - Data Transfer Object
 dto dir under tasks, and file create-task.dto.ts
 req comes - controller handles - defined param - req body goes to parameter of type of shape - into service.
+
+Validation and error handling
+NestJS Pipes
+
+ValidationPipe - creating a task
+we can get empty fields from user so we need to validate.
+
+need two packages
+yarn add class-validator class-transformer
+
+use in dto files
+
+app.useGlobalPipes(new ValidationPipe());
+Automatically applies validation to all incoming requests based on the decorators inside your DTOs (Data Transfer Objects).
+
+NestJS applies it globally when app.useGlobalPipes(new ValidationPipe()) is used inside main.ts.
+The ValidationPipe automatically validates incoming request bodies against the DTO class before the request reaches the controller.
+The class-validator decorators (like @IsNotEmpty()) inside CreateTaskDto are triggered.
+
+app.useGlobalPipes(new ValidationPipe()) automatically applies validation to all DTOs across your app.
+It works with class-validator decorators like @IsNotEmpty(), @IsEmail(), etc.
+If a request does not match the DTO, NestJS will return a 400 Bad Request error automatically.
+You don’t need to manually call validate() on every request—NestJS handles it for you.
+
+Error Handling.
