@@ -1,0 +1,13 @@
+1️⃣ Create an orphan branch	git checkout --orphan empty-branch	Creates a new branch without history
+2️⃣ Remove files (optional)	git rm -rf .	Clears all tracked files
+3️⃣ Create an empty commit (optional)	git commit --allow-empty -m "Initial empty commit"	Required if pushing to remote
+4️⃣ Push branch (optional)	git push origin empty-branch	Pushes the branch to the remote
+5️⃣ Verify branch	git branch	Checks branch existence
+
+nest new . --skip-git 
+
+Robo 3T | Free, open-source MongoDB GUI (formerly Robomongo)
+install create connection with name local > save.
+
+install graphql dependencies
+npm install graphql graphql-tools apollo-server-express @nestjs/graphql
