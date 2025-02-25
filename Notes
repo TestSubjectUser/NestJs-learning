@@ -4,6 +4,19 @@
 4️⃣ Push branch (optional) git push origin empty-branch Pushes the branch to the remote
 5️⃣ Verify branch git branch Checks branch existence
 
+---
+
+Add MongoDB's GPG key
+Add the MongoDB repository
+Update package list
+Install MongoDB
+Start and enable MongoDB service
+Verify and connect to MongoDB
+
+---
+
+## have to perform all this tasks to connect with local mongodb
+
 nest new . --skip-git
 
 Robo 3T | Free, open-source MongoDB GUI (formerly Robomongo)
@@ -35,3 +48,5 @@ yarn add typeorm @nestjs/typeorm mongodb @types/mongodb
 
 LessonService and createLesson
 nest g service lesson --no-spec
+
+yarn add uuid
