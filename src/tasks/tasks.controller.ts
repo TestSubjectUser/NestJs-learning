@@ -8,70 +8,47 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { TasksService } from './tasks.service';
-import { taskStatus } from './task-status.enum';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
+import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
+import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
-  //   tasksService: TasksService; , no need of this with private
-  constructor(private tasksService: TasksService) {
-    // this.tasksService = tasksService;
-  }
+  constructor(private tasksService: TasksService) {}
 
-  // refactoring to using pgadmin
-  //   @Get()
-  //   getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
-  //     if (Object.keys(filterDto).length) {
-  //       return this.tasksService.getAllTasksWithFilters(filterDto);
-  //     }
-
+  // @Get()
+  // getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
+  //   if (Object.keys(filterDto).length) {
+  //     return this.tasksService.getTasksWithFilters(filterDto);
+  //   } else {
   //     return this.tasksService.getAllTasks();
   //   }
+  // }
 
-  //   @Post()
-  //   // Body decorator will assign all request body to body var.
-  //   //   createTask(@Body() body) {
-  //   // cherryPick
-  //   //   createTask(
-  //   //     @Body('title') title: string,
-  //   //     @Body('description') description: string,
-  //   //   ) {
-  //   createTask(@Body() createTaskDto: CreateTaskDto) {
-  //     // console.log(createTaskDto);
-  //     return this.tasksService.createTask(createTaskDto);
-  //   }
-
-  //   // path parameter.
-  //   @Get(':id')
-  //   getTaskById(@Param('id') id: string): Task | undefined {
-  //     return this.tasksService.getTaskById(id);
-  //   }
-  @Get(':id')
+  @Get('/:id')
   getTaskById(@Param('id') id: string): Promise<Task> {
     return this.tasksService.getTaskById(id);
   }
 
-  //   @Delete(':id')
-  //   deleteTask(@Param('id') id: string): void {
-  //     return this.tasksService.deleteTask(id);
-  //   }
-  //   //   deleteTaskById(@Param('id') id: string): Task | undefined {
-  //   //     return this.tasksService.deleteTaskById(id);
-  //   //   }
+  @Post()
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto);
+  }
 
-  //   //   helloWorld() {
-  //   //     this.tasksService.doSomething();
-  //   //   }
+  // @Delete('/:id')
+  // deleteTask(@Param('id') id: string): void {
+  //   return this.tasksService.deleteTask(id);
+  // }
 
-  //   @Patch(':id/status')
-  //   updateTaskStatus(
-  //     @Param('id') id: string,
-  //     @Body() updateTaskStatusDto: UpdateTaskStatusDto,
-  //   ): Task {
-  //     return this.tasksService.updateTaskStatus(id, updateTaskStatusDto.status);
-  //   }
+  // @Patch('/:id/status')
+  // updateTaskStatus(
+  //   @Param('id') id: string,
+  //   @Body() updateTaskStatusDto: UpdateTaskStatusDto,
+  // ): Task {
+  //   const { status } = updateTaskStatusDto;
+  //   return this.tasksService.updateTaskStatus(id, status);
+  // }
 }
