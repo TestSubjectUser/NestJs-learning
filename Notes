@@ -1,13 +1,29 @@
-1️⃣ Create an orphan branch	git checkout --orphan empty-branch	Creates a new branch without history
-2️⃣ Remove files (optional)	git rm -rf .	Clears all tracked files
-3️⃣ Create an empty commit (optional)	git commit --allow-empty -m "Initial empty commit"	Required if pushing to remote
-4️⃣ Push branch (optional)	git push origin empty-branch	Pushes the branch to the remote
-5️⃣ Verify branch	git branch	Checks branch existence
+1️⃣ Create an orphan branch git checkout --orphan empty-branch Creates a new branch without history
+2️⃣ Remove files (optional) git rm -rf . Clears all tracked files
+3️⃣ Create an empty commit (optional) git commit --allow-empty -m "Initial empty commit" Required if pushing to remote
+4️⃣ Push branch (optional) git push origin empty-branch Pushes the branch to the remote
+5️⃣ Verify branch git branch Checks branch existence
 
-nest new . --skip-git 
+nest new . --skip-git
 
 Robo 3T | Free, open-source MongoDB GUI (formerly Robomongo)
 install create connection with name local > save.
 
 install graphql dependencies
-npm install graphql graphql-tools apollo-server-express @nestjs/graphql
+yarn add graphql graphql-tools apollo-server-express @nestjs/graphql
+
+yarn add @nestjs/apollo
+yarn add @apollo/server
+
+nest g module lesson
+
+defining the lesson GraphQL type
+ObjectType with types named lesson, four fields, ID field is type of ID
+
+creating the lesson resolver
+Resolvers are the core of how GraphQL works in NestJS. They handle queries, mutations, and subscriptions by fetching data from a database or another source.
+
+@Resolver(() => LessonType): Specifies that this resolver handles LessonType queries.
+Without resolvers, GraphQL would not know how to respond to API requests.
+
+Every resolver is just a service that provides data. In NestJS, we must register services in the providers array so that NestJS can inject and manage them.

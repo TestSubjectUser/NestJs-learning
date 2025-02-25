@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { LessonModule } from './lesson/lesson.module';
 
 @Module({
   imports: [
@@ -9,6 +10,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       // save schema in memory and re-generate on every nest proj startup
       autoSchemaFile: 'src/schema.gql',
     }),
+    LessonModule,
   ],
   controllers: [],
   providers: [],
