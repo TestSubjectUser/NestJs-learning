@@ -50,3 +50,18 @@ LessonService and createLesson
 nest g service lesson --no-spec
 
 yarn add uuid
+
+create lesson graphql mutation
+
+add mutation with graphql
+
+```mutation{
+  createLesson(
+    name: "Khushal name 1"
+    startDate: "2020-03-28T18:00:00Z"
+    endDate: "2020-03-28T18:00:00Z"
+  ){
+    name
+  }
+}
+```

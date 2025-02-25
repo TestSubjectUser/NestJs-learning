@@ -11,7 +11,6 @@ import { Lesson } from './lesson/lesson.entity';
       type: 'mongodb',
       url: 'mongodb://localhost/school',
       synchronize: true,
-      useUnifiedTopology: true,
       entities: [Lesson],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
