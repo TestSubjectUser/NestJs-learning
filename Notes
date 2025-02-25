@@ -27,3 +27,11 @@ Resolvers are the core of how GraphQL works in NestJS. They handle queries, muta
 Without resolvers, GraphQL would not know how to respond to API requests.
 
 Every resolver is just a service that provides data. In NestJS, we must register services in the providers array so that NestJS can inject and manage them.
+
+we can visit http://localhost:3000/graphql if server is running, check out schema
+
+TypeORM MongoDB and Lesson Entity
+yarn add typeorm @nestjs/typeorm mongodb @types/mongodb
+
+LessonService and createLesson
+nest g service lesson --no-spec
