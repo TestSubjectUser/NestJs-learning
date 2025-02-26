@@ -295,3 +295,27 @@ You use this parent object to access its properties, like the students field, wh
 The @Parent() decorator is required because the resolver needs access to the parent object (lesson) to resolve the field (students).
 GraphQL does not automatically pass the parent data to the resolver — the @Parent() decorator provides this.
 Without @Parent(), the resolver wouldn’t know which lesson’s students it should resolve.
+
+now below query will work...
+```graphql
+mutation{
+  createLesson(createLessonInput: {
+    name: "KubernetesWithStudents123asd"
+    startDate: "2025-02-26T18:00:00Z"
+    endDate: "2025-03-02T18:00:00Z"
+    students: [
+      "6209e3d3-946e-4694-b963-98fb34454fbe",
+      "fcef9bd0-06d0-4379-a3a6-d88f7793c1c6"
+    ]
+  }){
+    id
+    name
+    startDate
+    endDate
+    students{
+			firstname
+      lastname
+    }
+  }
+}
+```
