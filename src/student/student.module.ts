@@ -7,5 +7,7 @@ import { StudentResolver } from './student.resolver';
 @Module({
   imports: [TypeOrmModule.forFeature([Student])],
   providers: [StudentResolver, StudentService],
+  // makes it injectable to other module whom imports studentModule
+  exports: [StudentService],
 })
 export class StudentModule {}

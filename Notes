@@ -164,34 +164,134 @@ This file defines the GraphQL object type that determines how the Lesson entity 
 lesson.entity.ts (Database Representation)
 This file defines the actual database structure for storing Lesson data using TypeORM.
 
-'''graphql
-mutation{
-createLesson(createLessonInput: {
-name: "Docker"
-startDate: "2025-02-26T18:00:00Z"
-endDate: "2025-03-02T18:00:00Z"
-}){
-id
+```graphql
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "Docker"
+      startDate: "2025-02-26T18:00:00Z"
+      endDate: "2025-03-02T18:00:00Z"
+    }
+  ) {
+    id
+  }
 }
+mutation {
+  createStudent(
+    createStudentInput: { firstname: "studentFN2", lastname: "studentLN2" }
+  ) {
+    id
+  }
 }
-mutation{
-createStudent(createStudentInput:{
-firstname: "studentFN2", lastname:"studentLN2"
-}){
-id
+mutation {
+  assignLessonToStudents(
+    assignStudentsToLessonInput: {
+      lessonId: "83658cb5-9fe0-4f9c-95ce-f521de9e6bbd"
+      studentIds: [
+        "fcef9bd0-06d0-4379-a3a6-d88f7793c1c6"
+        "6209e3d3-946e-4694-b963-98fb34454fbe"
+      ]
+    }
+  ) {
+    name
+  }
 }
+```
+
+we're providing empty array initially in lesson.students,
+improvement - assign students upon lesson creation
+
+```graphql
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "KubernetesWithStudents"
+      startDate: "2025-02-26T18:00:00Z"
+      endDate: "2025-03-02T18:00:00Z"
+      students: [
+        "6209e3d3-946e-4694-b963-98fb34454fbe"
+        "fcef9bd0-06d0-4379-a3a6-d88f7793c1c6"
+      ]
+    }
+  ) {
+    id
+    name
+  }
 }
-mutation{
-assignLessonToStudents(
-assignStudentsToLessonInput:{
-lessonId: "83658cb5-9fe0-4f9c-95ce-f521de9e6bbd",
-studentIds: [
-"fcef9bd0-06d0-4379-a3a6-d88f7793c1c6",
-"6209e3d3-946e-4694-b963-98fb34454fbe"
-]
+
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "KubernetesWithNoStudents"
+      startDate: "2025-02-26T18:00:00Z"
+      endDate: "2025-03-02T18:00:00Z"
+      students: []
+    }
+  ) {
+    id
+    name
+  }
 }
-){
-name
+```
+
+resolve - students field in lesson
+
+now when we add firstname, lastname inside students return query it will give error
+
+```graphql
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "KubernetesWithStudents123"
+      startDate: "2025-02-26T18:00:00Z"
+      endDate: "2025-03-02T18:00:00Z"
+      students: [
+        "6209e3d3-946e-4694-b963-98fb34454fbe"
+        "fcef9bd0-06d0-4379-a3a6-d88f7793c1c6"
+      ]
+    }
+  ) {
+    students {
+      firstname
+      lastname
+    }
+  }
 }
+```
+
+the @ResolveField decorator is used to define resolvers for fields that are not directly fetched from the database or require additional computation or transformation before being returned. This decorator is essential for handling derived data or fetching related data in a GraphQL schema.
+
+@ResolveField() is used to dynamically resolve a field in a GraphQL type.
+
+```javascript
+@ResolveField()
+async students(@Parent() lesson: LessonType) {
+  // Fetch students based on lesson.students (array of student IDs)
 }
-'''
+```
+
+Here’s what happens:
+
+The LessonType has a students field, but in your database (lesson.entity.ts), it's just an array of student IDs (students: string[]).
+The resolver function retrieves the actual Student objects based on those IDs.
+GraphQL will call this resolver only when a query requests the students field.
+
+the function name must match the field name
+
+1️⃣ The Role of @Parent() in GraphQL Resolvers
+When you define a @ResolveField() in a NestJS GraphQL resolver, you're telling NestJS to handle the resolution of that field. However, the @ResolveField() decorator doesn't automatically know the parent object of the field. The parent object is essentially the data returned by the parent query, in your case, the LessonType object.
+
+2️⃣ What Happens Behind the Scenes?
+When a GraphQL query is made, NestJS uses the following process:
+
+The query hits the main resolver, for example, getLesson(id: "123").
+NestJS executes the corresponding resolver method (getLesson in your case).
+NestJS resolves the LessonType object and hands it over as the parent data to the resolver.
+When the students field is requested, NestJS calls the students resolver method.
+The @Parent() decorator is used to access the parent object (the LessonType object).
+You use this parent object to access its properties, like the students field, which contains the student IDs.
+
+6️⃣ Conclusion
+The @Parent() decorator is required because the resolver needs access to the parent object (lesson) to resolve the field (students).
+GraphQL does not automatically pass the parent data to the resolver — the @Parent() decorator provides this.
+Without @Parent(), the resolver wouldn’t know which lesson’s students it should resolve.

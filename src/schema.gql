@@ -33,6 +33,7 @@ input CreateLessonINput {
   name: String!
   startDate: String!
   endDate: String!
+  students: [ID!]! = []
 }
 
 input AssignStudentsToLessonInput {
