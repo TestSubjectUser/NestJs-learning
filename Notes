@@ -122,3 +122,12 @@ TypeOrmModule.forRoot({...}) Establishes the database connection globally. Used 
 TypeOrmModule.forFeature([...]) Registers specific entities in a module, making their repositories available via dependency injection. Used in feature modules like StudentModule.
 
 Now, studentRepository can be injected into StudentService and used to interact with the database.
+
+@Args('createStudentInput') createStudentInput: CreateStudentInput
+
+The @Args('createStudentInput') tells NestJS to extract the argument named createStudentInput from the GraphQL request payload.
+The createStudentInput: CreateStudentInput ensures TypeScript knows the expected shape of the argument.
+
+// It extracts the createStudentInput argument from the GraphQL request.
+// It validates that the received data matches the CreateStudentInput type.
+// It ensures that only the expected fields are passed, avoiding extra/unwanted data.
