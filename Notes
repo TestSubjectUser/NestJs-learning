@@ -97,3 +97,9 @@ mutation {
 #   }
 # }
 ```
+
+Get All Lessons
+
+Student module
+nest g module student
+nest g service student --no-spec

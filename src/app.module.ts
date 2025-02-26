@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { LessonModule } from './lesson/lesson.module';
 import { Lesson } from './lesson/lesson.entity';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { Lesson } from './lesson/lesson.entity';
       autoSchemaFile: 'src/schema.gql',
     }),
     LessonModule,
+    StudentModule,
   ],
   controllers: [],
   providers: [],

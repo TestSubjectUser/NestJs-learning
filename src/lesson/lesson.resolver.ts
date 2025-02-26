@@ -10,6 +10,11 @@ export class LessonResolver {
   lesson(@Args('id') id: string) {
     return this.lessonService.getLesson(id);
   }
+  // [LessonType] - array o LessonType in graphql
+  @Query((returns) => [LessonType])
+  lessons() {
+    return this.lessonService.getLessons();
+  }
 
   @Mutation((returns) => LessonType)
   createLesson(
