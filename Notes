@@ -155,3 +155,43 @@ query {
   }
 }
 ```
+
+Assign Students to lesson graphql mutation
+
+lesson.type.ts (GraphQL Representation)
+This file defines the GraphQL object type that determines how the Lesson entity is exposed in the GraphQL schema.
+
+lesson.entity.ts (Database Representation)
+This file defines the actual database structure for storing Lesson data using TypeORM.
+
+'''graphql
+mutation{
+createLesson(createLessonInput: {
+name: "Docker"
+startDate: "2025-02-26T18:00:00Z"
+endDate: "2025-03-02T18:00:00Z"
+}){
+id
+}
+}
+mutation{
+createStudent(createStudentInput:{
+firstname: "studentFN2", lastname:"studentLN2"
+}){
+id
+}
+}
+mutation{
+assignLessonToStudents(
+assignStudentsToLessonInput:{
+lessonId: "83658cb5-9fe0-4f9c-95ce-f521de9e6bbd",
+studentIds: [
+"fcef9bd0-06d0-4379-a3a6-d88f7793c1c6",
+"6209e3d3-946e-4694-b963-98fb34454fbe"
+]
+}
+){
+name
+}
+}
+'''

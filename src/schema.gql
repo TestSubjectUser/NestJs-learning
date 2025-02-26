@@ -2,17 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Student {
+  id: String!
+  firstname: String!
+  lastname: String!
+}
+
 type Lesson {
   id: ID!
   name: String!
   startDate: String!
   endDate: String!
-}
-
-type Student {
-  id: String!
-  firstname: String!
-  lastname: String!
+  students: [Student!]!
 }
 
 type Query {
@@ -24,6 +25,7 @@ type Query {
 
 type Mutation {
   createLesson(createLessonInput: CreateLessonINput!): Lesson!
+  assignLessonToStudents(assignStudentsToLessonInput: AssignStudentsToLessonInput!): Lesson!
   createStudent(createStudentInput: CreateStudentInput!): Student!
 }
 
@@ -31,6 +33,11 @@ input CreateLessonINput {
   name: String!
   startDate: String!
   endDate: String!
+}
+
+input AssignStudentsToLessonInput {
+  lessonId: ID!
+  studentIds: [ID!]!
 }
 
 input CreateStudentInput {

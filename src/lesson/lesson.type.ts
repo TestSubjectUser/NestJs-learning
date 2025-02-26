@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { StudentType } from 'src/student/student.type';
 
 @ObjectType('Lesson')
 export class LessonType {
@@ -13,6 +14,9 @@ export class LessonType {
 
   @Field()
   endDate: string;
+
+  @Field((type) => [StudentType])
+  students: StudentType[];
 }
 // Why Do You Need This File?
 // This file defines a GraphQL Object Type (LessonType) for your NestJS application.
