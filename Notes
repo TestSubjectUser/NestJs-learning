@@ -65,3 +65,35 @@ add mutation with graphql
   }
 }
 ```
+
+now we can see it in our localhost robo3t that mutation has happened
+
+getLesson, create lesson input
+Validation, create lesson input
+
+npm install class-validator class-transformer
+
+Decorator that marks a class as a GraphQL input type.
+@Field() decorator is used to mark a specific class property as a GraphQL field. Only properties decorated with this decorator will be defined in the schema.
+
+```graphql
+mutation {
+  createLesson(
+    createLessonInput: {
+      name: "someName"
+      startDate: "2025-02-28T18:00:00Z"
+      endDate: "2025-02-28T18:00:00Z"
+    }
+  ) {
+    name
+  }
+}
+# query{
+# 	lesson(id: "ac40204e-449d-4293-b906-a83ba0862268"){
+#     id
+#     name
+#     startDate
+#     endDate
+#   }
+# }
+```

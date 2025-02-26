@@ -10,9 +10,15 @@ type Lesson {
 }
 
 type Query {
-  lesson: Lesson!
+  lesson(id: String!): Lesson!
 }
 
 type Mutation {
-  createLesson(name: String!, startDate: String!, endDate: String!): Lesson!
+  createLesson(createLessonInput: CreateLessonINput!): Lesson!
+}
+
+input CreateLessonINput {
+  name: String!
+  startDate: String!
+  endDate: String!
 }
