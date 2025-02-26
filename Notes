@@ -131,3 +131,27 @@ The createStudentInput: CreateStudentInput ensures TypeScript knows the expected
 // It extracts the createStudentInput argument from the GraphQL request.
 // It validates that the received data matches the CreateStudentInput type.
 // It ensures that only the expected fields are passed, avoiding extra/unwanted data.
+
+```graphql
+# mutation{
+#   createStudent(createStudentInput:{
+#     firstname: "fname1", lastname:"fname2"
+#   }){
+#     id
+#   }
+# }
+query {
+  getStudents {
+    id
+    firstname
+    lastname
+  }
+}
+query {
+  getStudent(id: "9c0d8b58-0216-4a79-bd38-d319b19e1644") {
+    id
+    firstname
+    lastname
+  }
+}
+```

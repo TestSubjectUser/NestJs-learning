@@ -22,6 +22,12 @@ export class StudentService {
 
     return this.studentRepository.save(student);
   }
+  async getStudents(): Promise<Student[]> {
+    return this.studentRepository.find();
+  }
+  async getStudent(id: string): Promise<Student | null> {
+    return this.studentRepository.findOne({ where: { id } });
+  }
 }
 // The @Args('createStudentInput') tells NestJS to extract the argument named createStudentInput from the GraphQL request payload.
 // The createStudentInput: CreateStudentInput ensures TypeScript knows the expected shape of the argument.
