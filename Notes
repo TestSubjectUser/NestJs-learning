@@ -103,3 +103,22 @@ Get All Lessons
 Student module
 nest g module student
 nest g service student --no-spec
+
+INFO:
+Why do we use TypeOrmModule.forFeature([Student]) in StudentModule?
+TypeOrmModule.forRoot(...) in AppModule sets up the global database connection for the entire NestJS application.
+However, NestJS follows a modular structure, so each module should only access the entities relevant to it.
+TypeOrmModule.forFeature([Student]) registers the Student entity within StudentModule, allowing dependency injection of Repository<Student>.
+
+🔹 Why can't we access StudentRepository directly without forFeature?
+NestJS lazy-loads dependencies and scopes repositories to specific modules for better organization.
+
+✅ TypeOrmModule.forFeature([Student]) ensures that NestJS injects the repository only within StudentModule.
+Without this, the StudentService wouldn't have access to Repository<Student>.
+
+🔹 Difference between forRoot() and forFeature()
+Method Purpose
+TypeOrmModule.forRoot({...}) Establishes the database connection globally. Used in AppModule.
+TypeOrmModule.forFeature([...]) Registers specific entities in a module, making their repositories available via dependency injection. Used in feature modules like StudentModule.
+
+Now, studentRepository can be injected into StudentService and used to interact with the database.
